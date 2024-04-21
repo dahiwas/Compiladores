@@ -1,7 +1,12 @@
 # Compiladores
 Repositorio dos trabalhos da matéria de compiladores
 
-Em cada um dos trabalho terá um arquivo: 'README.txt' dando as instruções de como compilar e executar os trabalhos
+Alunos:
+Daniel Watanabe 800697 <br>
+Paula Larocca 769705 <br>
+Victor Bonometo 800232 <br>
+
+Em cada um dos trabalho terá um arquivo: 'README.pdf' dando as instruções de como compilar e executar os trabalhos
 
 T1:  :white_check_mark: <br>
 T2:   :bangbang:  <br>
