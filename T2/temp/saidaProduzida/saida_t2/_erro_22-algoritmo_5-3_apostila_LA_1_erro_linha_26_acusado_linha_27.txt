@@ -1,0 +1,2 @@
+Linha 26: erro sintatico proximo a escreva
+Fim da compilacao

@@ -1,0 +1,4 @@
+Linha 26: erro sintatico proximo a escreva
+Fim da compilacao
+Linha 27: erro sintatico proximo a fim_se
+Fim da compilacao

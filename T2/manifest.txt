@@ -1,0 +1,4 @@
+manifest-Version: 1.0
+Class-Path: . /home/ubuntu/comp/t2/antlr-4.13.1-complete.jar
+Main-Class: T2
+

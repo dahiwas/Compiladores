@@ -1,0 +1,6 @@
+Linha 19: erro sintatico proximo a pontoMaisProximo
+Fim da compilacao
+Linha 34: erro sintatico proximo a 34
+Fim da compilacao
+Linha 35: erro sintatico proximo a fim_se
+Fim da compilacao
