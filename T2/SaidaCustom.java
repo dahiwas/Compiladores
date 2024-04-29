@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 import java.io.PrintWriter;
 import java.util.BitSet;
@@ -46,10 +47,13 @@ public class SaidaCustom implements ANTLRErrorListener {
         if (tokenText.startsWith("<") && tokenText.endsWith(">")) {
             extractedText = tokenText.substring(1, tokenText.length() - 1);
         }
+        
 
         writer.println("Linha " + line + ": erro sintatico proximo a " + extractedText);
         writer.println("Fim da compilacao");
         throw new RuntimeException("Erro de compilação encontrado. Terminando a execução.");
+
+        
 
     }
 }

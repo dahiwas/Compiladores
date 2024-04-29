@@ -6,9 +6,6 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import com.compiladores.custom.SaidaCustom;
 
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Parser;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 
@@ -42,33 +39,43 @@ public class T2 {
             CommonTokenStream tokens = new CommonTokenStream(lex);
             GramaParser parser = new GramaParser(tokens);
             SaidaCustom saidaCustom = new SaidaCustom(writer);
-            parser.addErrorListener(saidaCustom);
-            parser.programa();
+            
+
 
             Token t = null;
-	    /* SAIDA DO LEXER
-            //Percorre por todo o documento de entrada
+            
+            // SAIDA DO LEXER
+                //Percorre por todo o documento de entrada
             while ((t = lex.nextToken()).getType() != Token.EOF) {
                 String nomeToken = GramaLexer.VOCABULARY.getDisplayName(t.getType());
                 //Separação pela nomenclatura dos tokens encontrados na gramática dada
                 //Cada separação terá seu respectivo log no arquivo de saída
                 if(nomeToken.equals("ERRO")){
                     writer.println("Linha "+t.getLine()+": "+t.getText()+" - simbolo nao identificado");
-                    break;
+                    writer.println("Fim da compilacao");
+                    return;
                 } else if(nomeToken.equals("OPEN_COMMENT")){
                     writer.println("Linha "+t.getLine()+": comentario nao fechado");
-                    break;
+                    writer.println("Fim da compilacao");
+                    return;
                 } else if(nomeToken.equals("OPEN_CADEIA")){
                     writer.println("Linha "+t.getLine()+": cadeia literal nao fechada");
-                    break;
-                } else {
-                    writer.println("<"+"'"+t.getText()+"'"+","+nomeToken+">");
+                    writer.println("Fim da compilacao");
+                    return;
                 }
             }
-	    */
 
-	    //SAIDA DO PARSER
-	    //
+            cs = CharStreams.fromFileName(inputFile.getAbsolutePath());
+            //Utilização da gramática compilada anteriormente, perceba que o nome GramaLexer foi o definido anteriormente
+            lex = new GramaLexer(cs);
+            tokens = new CommonTokenStream(lex);
+            parser = new GramaParser(tokens);
+            saidaCustom = new SaidaCustom(writer);
+            parser.addErrorListener(saidaCustom);
+            parser.programa();
+
+
+	    
 
         //Log de erro no terminal
         } catch (IOException e) {
