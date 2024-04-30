@@ -31,12 +31,18 @@ public class T2 {
             return;
         }
 
+	//O próprio ANTLR4 já faz a verificação de erros sintáticos e faz a sua própria saída, portanto, para conseguir captar essas nuances é necessário implementar uma nova classe
+	//SaidaCustom.java <- faz-se necessário para conseguirmos escrever no arquivo de saída quando encontrar um erro sintático
+	//Esse programa está rodando através de 2 varreduras, primeiro ele verifica erros léxicos, após isso, verifica os erros sintáticos
+	//Caso encontre qualquer um dos erros, ele termina a execução
+	    
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
             //Seria a variável que percorrerá por todos os tokens identificados do arquivo de entrada
             CharStream cs = CharStreams.fromFileName(inputFile.getAbsolutePath());
             //Utilização da gramática compilada anteriormente, perceba que o nome GramaLexer foi o definido anteriormente
             GramaLexer lex = new GramaLexer(cs);
             CommonTokenStream tokens = new CommonTokenStream(lex);
+	    //Utilizzação da gramática parser compilada anteriormente
             GramaParser parser = new GramaParser(tokens);
             SaidaCustom saidaCustom = new SaidaCustom(writer);
             
@@ -65,12 +71,14 @@ public class T2 {
                 }
             }
 
+	    //Reset do charstream
             cs = CharStreams.fromFileName(inputFile.getAbsolutePath());
-            //Utilização da gramática compilada anteriormente, perceba que o nome GramaLexer foi o definido anteriormente
+	    //Lex nem precisaria estar aqui
             lex = new GramaLexer(cs);
             tokens = new CommonTokenStream(lex);
             parser = new GramaParser(tokens);
             saidaCustom = new SaidaCustom(writer);
+	    //Segunda varredura: capta-se os erros de forma customizada
             parser.addErrorListener(saidaCustom);
             parser.programa();
 
