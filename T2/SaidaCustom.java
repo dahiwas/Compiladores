@@ -38,17 +38,17 @@ public class SaidaCustom implements ANTLRErrorListener {
     @Override
     public void	syntaxError(Recognizer<?,?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
         // Aqui vamos colocar o tratamento de erro customizado
-
+        // Caso encontre o erro será no formato de Token
         Token t = (Token) offendingSymbol;
-        
+        // Transformar em string
         String tokenText = t.getText();
         String extractedText = tokenText;
-
+       // Basicamente retira os caracteres < >, principalmente pra tratar o erro de EOF (end of file)
         if (tokenText.startsWith("<") && tokenText.endsWith(">")) {
             extractedText = tokenText.substring(1, tokenText.length() - 1);
         }
         
-
+        // Encontra o erro sintático e escreve no arquivo de saída, no T2 (Main) ele termina a execução
         writer.println("Linha " + line + ": erro sintatico proximo a " + extractedText);
         writer.println("Fim da compilacao");
         throw new RuntimeException("Erro de compilação encontrado. Terminando a execução.");
