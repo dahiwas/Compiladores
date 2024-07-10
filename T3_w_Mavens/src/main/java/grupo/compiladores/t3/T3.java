@@ -94,6 +94,7 @@ public class T3 {
             //Analisador Semântico
             VisitorCustom v = new VisitorCustom();
             v.visitPrograma(arvore);
+            //Escrever no arquivo de saída os erros semânticos
             GramaUtils.errosSemanticos.forEach((s) -> writer.println(s));
             writer.println("Fim da compilacao");
             

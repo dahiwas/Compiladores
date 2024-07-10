@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class TabelaDeSimbolos {
     
+    //Tipos possíveis de Tipos
     public enum Tipo{
         INTEIRO,
         REAL,
@@ -28,14 +29,17 @@ public class TabelaDeSimbolos {
     
     private final Map<String, EntradaTabelaDeSimbolos> tabela;
     
+    //Construtor
     public TabelaDeSimbolos(){
         this.tabela = new HashMap<>();
     }
     
+    //Inserir na tabelaDeSimbolos
     public void inserir(String nome, Tipo tipo){
         tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipo));
     }
     
+    //Verificação se existe dentro da TabelaDeSimbolos
     public boolean existe(String nome){
         return tabela.containsKey(nome);
     }

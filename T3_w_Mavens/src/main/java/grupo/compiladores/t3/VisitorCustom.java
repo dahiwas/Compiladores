@@ -90,6 +90,7 @@ public class VisitorCustom extends GramaBaseVisitor<Void>{
         return super.visitVariavel(ctx);
     }
     
+    //identificador     : IDENT ('.' IDENT)* dimensao;
     @Override 
     public Void visitIdentificador(GramaParser.IdentificadorContext ctx){
         String parentCtx = ctx.getParent().getClass().getSimpleName();
@@ -114,18 +115,23 @@ public class VisitorCustom extends GramaBaseVisitor<Void>{
     public Void visitCmdAtribuicao(GramaParser.CmdAtribuicaoContext ctx) {
         String varNome = ctx.identificador().getText();
         TabelaDeSimbolos.Tipo tipoVariavel = tabela.verificar(varNome);
-
+        //Verificação se existe o identificador na tabela
         if (tipoVariavel == null) {
             Token startToken = ctx.identificador().start;
             GramaUtils.adicionarErroSemantico(startToken, "variável " + varNome + " não declarada");
             return super.visitCmdAtribuicao(ctx);
         }
 
+        //Verificar o tipo da expressão
         TabelaDeSimbolos.Tipo tipoExpressao = verificarTipo(tabela, ctx.expressao());
 
         // Verificar se a expressão é especificamente zero
         boolean isZero = ctx.expressao().getText().equals("0");
 
+        //Verifica se são tipos diferentes diferente
+        //Verifica se tipoVariavel não é numérico
+        //Verifica se tipoExpressão é numérico
+        //Verifica se a expressão não é zero
         if (tipoVariavel != tipoExpressao && !(GramaUtils.isNumeric(tipoVariavel) && GramaUtils.isNumeric(tipoExpressao)) && !isZero) {
             Token startToken = ctx.identificador().start;
             GramaUtils.adicionarErroSemantico(startToken, "atribuicao nao compativel para " + varNome);
